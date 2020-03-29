@@ -1,0 +1,24 @@
+apiVersion: networking.istio.io/v1alpha
+kind: VirtualService
+metadata:
+    namespace: stg
+    name: spinnaker-demo-virtual-service
+    labels:
+	    app: myapp
+
+
+spec:
+  hostss:
+    - "*"
+    - gateways:
+        - spinnaker-demo-gateway
+    http:
+      - route:
+          - detination:
+                host: spinnaker-demo.stg.cluster.local
+                subset: v1
+              weight: 50
+            - destination:
+                - hosts: spinnaker-demo.svc.cluster.local
+                  subset: canary
+                weight: 50

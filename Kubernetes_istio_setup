@@ -1,0 +1,7 @@
+helm repo add istio.io https://storage.googleapis.com/istio-release/releases/1.6.0/charts/
+
+kubectl create namespace istio-system
+helm template install/kubernetes/helm/istio-init --name istio-init --namespace istio-system | kubectl apply -f -
+kubectl -n istio-system wait --for=condition=complete job --all
+kubectl get svc -n istio-system
+kubectl get pods -n istio-system

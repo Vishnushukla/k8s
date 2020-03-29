@@ -1,0 +1,8 @@
+helm install --name my-release stable/spinnaker --timeout 600
+#Configurable values are documented in the values.yaml.
+
+#Specify each parameter using the --set key=value[,key=value] argument to helm install.
+helm install --name my-release -f values.yaml stable/spinnaker
+
+#Configuring arbitrary clusters with a kubernetes secret
+kubectl create secret generic --from-file=$HOME/.kube/config my-kubeconfig
